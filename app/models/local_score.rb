@@ -1,0 +1,2 @@
+class LocalScore < ApplicationRecord
+end
