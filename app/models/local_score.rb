@@ -1,2 +1,0 @@
-class LocalScore < ApplicationRecord
-end
