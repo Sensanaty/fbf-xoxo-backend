@@ -7,14 +7,14 @@ class ScoresController < ApplicationController
   end
 
   def show
-    render json: @score
+    render json: ScoreSerializer.new(@score).serializable_hash
   end
 
   def create
     @score = Score.new(score_params)
 
     if @score.save
-      render json: @score, status: :created, location: @score
+      render json: ScoreSerializer.new(@score).serializable_hash, status: :created, location: @score
     else
       render json: @score.errors, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class ScoresController < ApplicationController
 
   def update
     if @score.update(score_params)
-      render json: @score
+      render json: ScoreSerializer.new(@score).serializable_hash
     else
       render json: @score.errors, status: :unprocessable_entity
     end
@@ -39,6 +39,6 @@ class ScoresController < ApplicationController
   end
 
   def score_params
-    params.permit(:username, :wins, :losses, :draws)
+    params.permit(:username, :wins, :losses, :draws, :id)
   end
 end
